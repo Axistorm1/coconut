@@ -31,5 +31,6 @@ static void read_style_reports(void)
 
 int main(int argc, char **argv)
 {
+    system("coding-style . .");
     read_style_reports();
 }
