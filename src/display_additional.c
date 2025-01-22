@@ -31,3 +31,11 @@ void write_bottom_line(error_stats_t *stats)
         "%s\n", buffer, stats->total, stats->fatals, stats->majors, stats->minors, stats->infos, buffer);
     free(buffer);
 }
+
+void write_no_error(void)
+{
+    char *buffer = dash_line_buffer(get_terminal_size());
+    printf("%s\n"
+        "        │ No error found! Great job\n"
+        "%s\n", buffer, buffer);
+}

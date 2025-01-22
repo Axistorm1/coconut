@@ -55,5 +55,6 @@ char *get_file_extension(char *filepath);
 int get_terminal_size(void);
 void write_top_line(void);
 void write_bottom_line(error_stats_t *error_stats);
+void write_no_error(void);
 
 #endif /* COCONUT_H_ */

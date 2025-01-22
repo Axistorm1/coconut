@@ -53,8 +53,12 @@ int main(int argc, char **argv)
     arguments_t arguments = {0};
     error_stats_t error_stats = {0};
     error_content_t *errors = NULL;
+    int handling_result = handle_args(argc, argv, &arguments);
 
-    handle_args(argc, argv, &arguments);
+    if (handling_result == -1)
+        return -1;
+    if (handling_result == 1)
+        return 0;
     if (arguments.run_coding_style == true)
         system("coding-style . .");
     errors = read_style_reports(&error_stats);
@@ -63,7 +67,7 @@ int main(int argc, char **argv)
     write_top_line();
     write_errors(errors, &error_stats, arguments.verbose);
     if (error_stats.total == 0)
-        write(1, "No error found\n", 16);
+        write_no_error();
     else
         write_bottom_line(&error_stats);
     free_content(errors, error_stats.total);
