@@ -18,10 +18,13 @@ Usage: coconut [option]
 ```
 
 # TO-DO
--f to display certain files
--s to sort errors
+-f to display certain files <br>
+-s to sort errors <br>
+Change filepath display size <br>
+Add coconut.config <br>
 
 # Known bugs
+-v: Not all lines get correctly displayed
 
 # Contribute
 You can open issues and make pull requests, a collaborator will review them as fast as possible
