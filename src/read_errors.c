@@ -22,7 +22,9 @@ static void disassemble_error_line(char *line, error_content_t *content)
     content->filepath = strdup(strtok(line, ":"));
     content->line = strdup(strtok(NULL, ":"));
     content->severity = error_severity(strtok(NULL, ":"));
-    content->error_code = strndup(&strtok(NULL, ":")[2], 2);
+    content->error_code = strndup(&strtok(NULL, ":")[2], 3);
+    if (content->error_code[2] == '\n')
+        content->error_code[2] = 0;
 }
 
 error_content_t *read_style_reports(error_stats_t *error_stats)

@@ -55,6 +55,8 @@ int main(int argc, char **argv)
     error_content_t *errors = NULL;
 
     handle_args(argc, argv, &arguments);
+    if (arguments.run_coding_style == true)
+        system("coding-style . .");
     errors = read_style_reports(&error_stats);
     if (errors == NULL)
         return -1;
