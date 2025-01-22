@@ -13,7 +13,7 @@ static void read_style_reports(void)
     size_t error_count = 1;
 
     if (f_stream == NULL) {
-        write(2, "Couldn't read coding-style-reports.log", 39);
+        write(2, "Couldn't read coding-style-reports.log\n", 40);
         return;
     }
     write_top_line();
@@ -25,6 +25,7 @@ static void read_style_reports(void)
     }
     if (line)
         free(line);
+    write_bottom_line(error_count - 1, 0, 0, 0);
     fclose(f_stream);
 }
 

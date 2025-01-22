@@ -21,10 +21,10 @@ static const char *error_messages[42] = {
 // Minor yellow
 // Info cyan
 static const char *formats[4] = {
-    "%5lu   │ \x1b[30m%-21.21s -> (l-%s)%.*s%s %s\x1b[0m",
-    "%5lu   │ \x1b[31m%-21.21s -> (l-%s)%.*s%s %s\x1b[0m",
-    "%5lu   │ \x1b[33m%-21.21s -> (l-%s)%.*s%s %s\x1b[0m",
-    "%5lu   │ \x1b[36m%-21.21s -> (l-%s)%.*s%s %s\x1b[0m"};
+    "%5lu   │ \x1b[30m%-21.21s -> (l-%s)%.*s%s \x1b[0m│ %s",
+    "%5lu   │ \x1b[31m%-21.21s -> (l-%s)%.*s%s \x1b[0m│ %s",
+    "%5lu   │ \x1b[33m%-21.21s -> (l-%s)%.*s%s \x1b[0m│ %s",
+    "%5lu   │ \x1b[36m%-21.21s -> (l-%s)%.*s%s \x1b[0m│ %s"};
 
 static char *get_error_message(char *error_code)
 {
@@ -71,4 +71,15 @@ void write_top_line(void)
     printf("%s\n"
         "        │ File: %s\n"
         "%s\n", buffer, STYLE_REPORTS, buffer);
+}
+
+void write_bottom_line(size_t fatals, size_t majors, size_t minors, size_t infos)
+{
+    uint8_t terminal_cols = get_terminal_size();
+    char buffer[terminal_cols + 1];
+    buffer[terminal_cols] = 0;
+    memset(buffer, '-', terminal_cols);
+    printf("%s\n"
+        "        │ Total: %lu\n"
+        "%s\n", buffer, fatals + majors + minors + infos, buffer);
 }

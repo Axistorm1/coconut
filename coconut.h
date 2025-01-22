@@ -27,6 +27,7 @@ enum error_codes {
 // write_report.c
 void disassemble_error_line(char *line, size_t error_nb);
 void write_top_line();
+void write_bottom_line(size_t fatals, size_t majors, size_t minors, size_t infos);
 
 // utils.c
 uint8_t error_severity(char *line);
