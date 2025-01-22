@@ -67,4 +67,6 @@ int main(int argc, char **argv)
     else
         write_bottom_line(&error_stats);
     free_content(errors, error_stats.total);
+    if (arguments.remove_log_file == true)
+        system("rm -f coding-style-reports.log");
 }
