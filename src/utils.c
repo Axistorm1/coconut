@@ -32,5 +32,11 @@ int get_terminal_size(void)
 
 char *get_file_extension(char *filepath)
 {
-    return &filepath[strcspn(&filepath[1], ".") + 2];
+    char *return_value = NULL;
+    unsigned long extension_pos = strcspn(&filepath[1], ".") + 2;
+
+    if (extension_pos > strlen(filepath))
+        return NULL;
+    return_value = &filepath[extension_pos];
+    return return_value;
 }

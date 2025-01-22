@@ -25,6 +25,7 @@ Add coconut.config <br>
 
 # Known bugs
 -v: Not all lines get correctly displayed
+This repository has a false positive coding style error (F9)
 
 # Contribute
 You can open issues and make pull requests, a collaborator will review them as fast as possible
