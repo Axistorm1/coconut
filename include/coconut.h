@@ -50,7 +50,8 @@ int display_usage(void);
 error_content_t *read_style_reports(error_stats_t *error_stats);
 int error_severity(char *line);
 char *get_error_message(char *error_code);
-void write_errors(error_content_t *errors, error_stats_t *error_stats, bool verbose);
+void write_errors(
+    error_content_t *errors, error_stats_t *error_stats, bool verbose);
 char *get_file_extension(char *filepath);
 int get_terminal_size(void);
 void write_top_line(void);

@@ -22,6 +22,7 @@ int error_severity(char *line)
 int get_terminal_size(void)
 {
     struct winsize size;
+
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) == -1) {
         perror("ioctl");
         return 1;

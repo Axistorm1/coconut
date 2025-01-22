@@ -48,6 +48,17 @@ static void free_content(error_content_t *errors, int total_errors)
     free(errors);
 }
 
+static void write_report(
+    error_content_t *errors, error_stats_t *error_stats, bool verbose)
+{
+    write_top_line();
+    write_errors(errors, error_stats, verbose);
+    if (error_stats->total == 0)
+        write_no_error();
+    else
+        write_bottom_line(error_stats);
+}
+
 int main(int argc, char **argv)
 {
     arguments_t arguments = {0};
@@ -64,12 +75,7 @@ int main(int argc, char **argv)
     errors = read_style_reports(&error_stats);
     if (errors == NULL)
         return -1;
-    write_top_line();
-    write_errors(errors, &error_stats, arguments.verbose);
-    if (error_stats.total == 0)
-        write_no_error();
-    else
-        write_bottom_line(&error_stats);
+    write_report(errors, &error_stats, arguments.verbose);
     free_content(errors, error_stats.total);
     if (arguments.remove_log_file == true)
         system("rm -f coding-style-reports.log");
