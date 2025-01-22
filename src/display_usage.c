@@ -1,4 +1,4 @@
-#include "../include/coconut.h"
+#include "coconut.h"
 
 int display_usage(void)
 {

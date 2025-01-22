@@ -13,12 +13,20 @@ typedef struct arguments_s {
     bool run_coding_style;
 } arguments_t;
 
-typedef struct error_line_content_s {
-    int line;
+typedef struct error_content_s {
+    char *line;
     int severity;
     char *filepath;
     char *error_code;
-} error_line_content_t;
+} error_content_t;
+
+typedef struct error_stats_s {
+    int fatals;
+    int majors;
+    int minors;
+    int infos;
+    int total;
+} error_stats_t;
 
 enum error_severities {
     FATAL,
@@ -39,5 +47,13 @@ enum error_codes {
 };
 
 int display_usage(void);
+error_content_t *read_style_reports(error_stats_t *error_stats);
+int error_severity(char *line);
+char *get_error_message(char *error_code);
+void write_errors(error_content_t *errors, error_stats_t *error_stats, bool verbose);
+char *get_file_extension(char *filepath);
+int get_terminal_size(void);
+void write_top_line(void);
+void write_bottom_line(error_stats_t *error_stats);
 
 #endif /* COCONUT_H_ */

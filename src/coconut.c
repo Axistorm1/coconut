@@ -1,6 +1,7 @@
 #include <string.h>
 #include <unistd.h>
-#include "../include/coconut.h"
+#include <stdlib.h>
+#include "coconut.h"
 
 static int sort_mask(char *optarg)
 {
@@ -16,12 +17,13 @@ static int sort_mask(char *optarg)
 static int handle_args(int argc, char **argv, arguments_t *arguments)
 {
     int opt = 0;
+
     while (opt != -1) {
         opt = getopt(argc, argv, "hcrs:f:v");
         if (opt == '?')
             return -1;
         if (opt == 'h')
-            display_usage();
+            return display_usage();
         if (opt == 'c')
             arguments->run_coding_style = true;
         if (opt == 'r')
@@ -36,8 +38,31 @@ static int handle_args(int argc, char **argv, arguments_t *arguments)
     return 0;
 }
 
+static void free_content(error_content_t *errors, int total_errors)
+{
+    for (int i = 0; i < total_errors; i++) {
+        free((&errors[i])->error_code);
+        free((&errors[i])->filepath);
+        free((&errors[i])->line);
+    }
+    free(errors);
+}
+
 int main(int argc, char **argv)
 {
     arguments_t arguments = {0};
+    error_stats_t error_stats = {0};
+    error_content_t *errors = NULL;
+
     handle_args(argc, argv, &arguments);
+    errors = read_style_reports(&error_stats);
+    if (errors == NULL)
+        return -1;
+    write_top_line();
+    write_errors(errors, &error_stats, arguments.verbose);
+    if (error_stats.total == 0)
+        write(1, "No error found\n", 16);
+    else
+        write_bottom_line(&error_stats);
+    free_content(errors, error_stats.total);
 }

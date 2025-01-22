@@ -5,20 +5,21 @@
 #include <string.h>
 #include "coconut.h"
 
-uint8_t error_severity(char *line)
+int error_severity(char *line)
 {
-    if (strstr(line, "FATAL"))
+    line = &line[1];
+    if (strcmp(line, "FATAL") == 0)
         return FATAL;
-    if (strstr(line, "MAJOR"))
+    if (strcmp(line, "MAJOR") == 0)
         return MAJOR;
-    if (strstr(line, "MINOR"))
+    if (strcmp(line, "MINOR") == 0)
         return MINOR;
-    if (strstr(line, "INFO"))
+    if (strcmp(line, "INFO") == 0)
         return INFO;
     return 3;
 }
 
-uint8_t get_terminal_size()
+int get_terminal_size(void)
 {
     struct winsize size;
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) == -1) {
@@ -26,4 +27,9 @@ uint8_t get_terminal_size()
         return 1;
     }
     return size.ws_col;
+}
+
+char *get_file_extension(char *filepath)
+{
+    return &filepath[strcspn(&filepath[1], ".") + 2];
 }
