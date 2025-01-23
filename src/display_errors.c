@@ -16,22 +16,21 @@ static const char *colors[4] = {
 
 static void write_verbose(error_content_t *error)
 {
-    FILE *file = fopen(error->filepath, "r");
+    FILE *file = NULL;
     char *line = NULL;
     size_t len = 0;
     int line_nb = atoi(error->line);
 
-    if (is_object_file(error->filepath) == true) {
-        fclose(file);
+    if (is_object_file(error->filepath) == true)
         return;
-    }
+    file = fopen(error->filepath, "r");
     if (file == NULL){
         write(2, "Error opening file\n", 20);
         return;
     }
     for (int i = 0; i < line_nb && getline(&line, &len, file) != -1; i++);
     line[strlen(line) - 1] = 0;
-    printf("        │ -> %.128s\n", line);
+    printf("        │ -> %.120s\n", line);
     fclose(file);
     free(line);
 }

@@ -26,18 +26,23 @@ int get_terminal_size(void)
 
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) == -1) {
         perror("ioctl");
-        return 1;
+        return 0;
     }
     return size.ws_col;
 }
 
 static char *get_file_extension(char *filepath)
 {
-    char *extension = &strrchr(filepath, '.')[1];
+    char *filename = strrchr(filepath, '/');
+    char *extension = NULL;
 
-    if (extension[0] == '/')
+    if (filename == NULL)
         return NULL;
-    return extension;
+    filename = &filename[1];
+    extension = strrchr(filename, '.');
+    if (extension == NULL)
+        return NULL;
+    return &extension[1];
 }
 
 bool is_object_file(char *filepath)

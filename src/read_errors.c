@@ -33,13 +33,13 @@ error_content_t *read_style_reports(error_stats_t *stats)
     FILE *f_stream = fopen(STYLE_REPORTS, "r");
     char *line = NULL;
     size_t len = 0;
-    error_content_t *list = malloc(sizeof(error_content_t));
+    error_content_t *list = NULL;
 
     if (f_stream == NULL) {
         write(2, "Couldn't read coding-style-reports.log\n", 40);
-        free(list);
         return NULL;
     }
+    list = malloc(sizeof(error_content_t));
     while (getline(&line, &len, f_stream) != -1) {
         list = realloc(list, (stats->total + 1) * sizeof(error_content_t));
         disassemble_error_line(line, &list[stats->total]);

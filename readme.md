@@ -31,7 +31,7 @@ Change filepath display size <br>
 Add coconut.config <br>
 
 # Known bugs
--v: Not all lines get correctly displayed <br>
+-v: Some files might be wrongly displayed + not all object files are ignored <br>
 This repository has a false positive coding style error (F9)
 
 # Contribute

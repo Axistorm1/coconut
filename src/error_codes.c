@@ -11,18 +11,18 @@ static const char *error_messages[42] = {
     "G2: Separate functions with a single line",
     "G3: Preprocessor directive indentation",
     "G4: Only global constants",
-    "G5: Can only include .h",
+    "G5: Can only include .h files",
     "G6: Missing line ending",
     "G7: Trailing spaces",
     "G8: Leading/Trailing lines",
     "G9: Define constant values",
     "G10:Inline assembly is forbidden",
-    "F1: Functions do a single thing",
+    "F1: Functions should do a single thing",
     "F2: Functions names must be snake_case",
     "F3: Max columns reached (80)",
     "F4: Max lines reached (20)",
     "F5: Max function parameters reached (4)",
-    "F6: Functions without parameter take void",
+    "F6: Functions without parameters take void",
     "F7: Always pass structures as pointers",
     "F8: No comments within a function",
     "F9: No nested functions",
@@ -44,7 +44,7 @@ static const char *error_messages[42] = {
     "A1: Not modified variables must be marked as constant",
     "A2: Use accurate types",
     "A3: Missing line break at the end of file",
-    "A4: Mark intern-only functions and global variabels as static"};
+    "A4: Mark intern-only functions and global variables as static"};
 
 char *get_error_message(char *error_code)
 {
