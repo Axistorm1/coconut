@@ -57,5 +57,6 @@ int get_terminal_size(void);
 void write_top_line(void);
 void write_bottom_line(error_stats_t *error_stats);
 void write_no_error(void);
+void sort_errors(error_content_t *error_list, int sort_mask, int error_count);
 
 #endif /* COCONUT_H_ */

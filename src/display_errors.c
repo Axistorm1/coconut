@@ -31,7 +31,7 @@ static void write_verbose(error_content_t *error)
     }
     for (int i = 0; i < line_nb && getline(&line, &len, file) != -1; i++);
     line[strlen(line) - 1] = 0;
-    printf("        │ -> %.50s\n", line);
+    printf("        │ -> %.128s\n", line);
     fclose(file);
     free(line);
 }
@@ -41,7 +41,7 @@ static void write_formatted_error(error_content_t *error, int error_nb)
     char *error_message = get_error_message(error->error_code);
     const char *color_code = colors[error->severity];
 
-    printf("%5d   │ %s%-21.21s -> (l-%s)%.*s %4s \x1b[0m│ %s\n", error_nb,
+    printf("%5d   │ %s%-32.32s -> (l-%s)%.*s %4s \x1b[0m│ %s\n", error_nb,
         color_code, error->filepath, error->line, 5 - (int)strlen(error->line),
         "     ", error->error_code, &error_message[4]);
 }

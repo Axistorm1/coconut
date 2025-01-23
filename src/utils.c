@@ -48,7 +48,8 @@ bool is_object_file(char *filepath)
         return false;
     if (extension == NULL || strcmp(extension, "") == 0 ||
         strcmp(extension, "o") == 0 || strcmp(extension, "out") == 0 ||
-        strcmp(extension, "a") == 0)
+        strcmp(extension, "a") == 0 || strcmp(extension, "gcno") == 0 ||
+        strcmp(extension, "gcda") == 0)
         return true;
     return false;
 }

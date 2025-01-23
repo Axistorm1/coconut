@@ -5,6 +5,7 @@ SRC	=	src/coconut.c	\
 		src/error_codes.c	\
 		src/read_errors.c	\
 		src/utils.c	\
+		src/sort_errors.c	\
 
 INCLUDE	=	include/
 

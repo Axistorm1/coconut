@@ -4,6 +4,13 @@ A color wrapper for Epitech's banana coding-style-checker
 # Example
 ![Exemple](https://i.imgur.com/KWYrKwL.png)
 
+# Installation
+```
+git clone git@github.com:Axistorm1/coconut.git
+cd coconut
+sudo ./install.sh
+```
+
 # Dependencies
 Coding-style-checker <br>
 GCC <br>
