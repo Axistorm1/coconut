@@ -40,4 +40,5 @@ void write_no_error(void)
     printf("%s\n"
         "        │ No error found! Great job\n"
         "%s\n", buffer, buffer);
+    free(buffer);
 }
