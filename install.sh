@@ -18,3 +18,4 @@ cp "$BIN_NAME" "$INSTALL_DIR"
 make -s fclean
 
 echo "Installation complete!"
+coconut -h

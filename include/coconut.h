@@ -7,7 +7,7 @@
 
 typedef struct arguments_s {
     char *file;
-    unsigned int sort_mask;
+    int sort_mask;
     bool remove_log_file;
     bool verbose;
     bool run_coding_style;

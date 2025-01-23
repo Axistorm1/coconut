@@ -19,14 +19,14 @@ Make <br>
 # Usage
 ```
 Usage: coconut [option]
-  -c    Run coding-style-checker before displaying errors
-  -v    Display additional information
-  -r    Remove log file after displaying errors
+  -c        Run coding-style-checker before displaying errors
+  -v        Display additional information
+  -r        Remove log file after displaying errors
+  -s [opt]  Sort output either by "error" or "severity"
 ```
 
 # TO-DO
 -f to display certain files <br>
--s to sort errors <br>
 Change filepath display size <br>
 Add coconut.config <br>
 

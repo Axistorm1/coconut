@@ -16,8 +16,11 @@ static int error_cmp(const void *error1, const void *error2)
 
 void sort_errors(error_content_t *error_list, int sort_mask, int error_count)
 {
-    if (sort_mask == 2)
-        qsort(error_list, error_count, sizeof(error_content_t), &error_cmp);
-    if (sort_mask == 4)
-        qsort(error_list, error_count, sizeof(error_content_t), &severity_cmp);
+    int (*sort_functions[3])(const void *, const void *) =
+    {NULL, &error_cmp, &severity_cmp};
+
+    qsort(error_list,
+        error_count,
+        sizeof(error_content_t),
+        sort_functions[sort_mask]);
 }
