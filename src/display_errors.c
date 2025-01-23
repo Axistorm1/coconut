@@ -20,13 +20,11 @@ static void write_verbose(error_content_t *error)
     char *line = NULL;
     size_t len = 0;
     int line_nb = atoi(error->line);
-    char *extension = get_file_extension(error->filepath);
 
-    if (extension == NULL || strcmp(extension, "") == 0 ||
-        strcmp(extension, "o") == 0 || strcmp(extension, "out") == 0) {
+    if (is_object_file(error->filepath) == true) {
         fclose(file);
         return;
-        }
+    }
     if (file == NULL){
         write(2, "Error opening file\n", 20);
         return;

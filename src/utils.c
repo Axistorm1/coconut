@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 #include <sys/ioctl.h>
 #include <stdio.h>
@@ -30,13 +31,26 @@ int get_terminal_size(void)
     return size.ws_col;
 }
 
-char *get_file_extension(char *filepath)
+static char *get_file_extension(char *filepath)
 {
     char *return_value = NULL;
-    unsigned long extension_pos = strcspn(&filepath[1], ".") + 2;
+    unsigned long extension_pos = strcspn(filepath, ".") + 1;
 
     if (extension_pos > strlen(filepath))
         return NULL;
     return_value = &filepath[extension_pos];
     return return_value;
+}
+
+bool is_object_file(char *filepath)
+{
+    char *extension = get_file_extension(&filepath[1]);
+
+    if (strstr(filepath, "Makefile") != NULL)
+        return false;
+    if (extension == NULL || strcmp(extension, "") == 0 ||
+        strcmp(extension, "o") == 0 || strcmp(extension, "out") == 0 ||
+        strcmp(extension, "a") == 0)
+        return true;
+    return false;
 }

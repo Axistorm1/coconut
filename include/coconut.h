@@ -52,7 +52,7 @@ int error_severity(char *line);
 char *get_error_message(char *error_code);
 void write_errors(
     error_content_t *errors, error_stats_t *error_stats, bool verbose);
-char *get_file_extension(char *filepath);
+bool is_object_file(char *filepath);
 int get_terminal_size(void);
 void write_top_line(void);
 void write_bottom_line(error_stats_t *error_stats);
