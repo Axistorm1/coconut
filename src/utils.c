@@ -33,18 +33,16 @@ int get_terminal_size(void)
 
 static char *get_file_extension(char *filepath)
 {
-    char *return_value = NULL;
-    unsigned long extension_pos = strcspn(filepath, ".") + 1;
+    char *extension = &strrchr(filepath, '.')[1];
 
-    if (extension_pos > strlen(filepath))
+    if (extension[0] == '/')
         return NULL;
-    return_value = &filepath[extension_pos];
-    return return_value;
+    return extension;
 }
 
 bool is_object_file(char *filepath)
 {
-    char *extension = get_file_extension(&filepath[1]);
+    char *extension = get_file_extension(filepath);
 
     if (strstr(filepath, "Makefile") != NULL)
         return false;
