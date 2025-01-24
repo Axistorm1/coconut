@@ -22,7 +22,8 @@ Usage: coconut [option]
   -c        Run coding-style-checker before displaying errors
   -v        Display additional information
   -r        Remove log file after displaying errors
-  -s [opt]  Sort output either by "error" or "severity"
+  -s [opt]  Sort output either by "file", "error" or "severity" (default "file")
+  -l        Add a line between different errors depending on the sorting flag
 ```
 
 # TO-DO

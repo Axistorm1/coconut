@@ -5,6 +5,8 @@
 
 static int sort_mask(char *optarg)
 {
+    if (strcmp(optarg, "file") == 0)
+        return 0;
     if (strcmp(optarg, "error") == 0)
         return 1;
     if (strcmp(optarg, "severity") == 0)
@@ -31,6 +33,8 @@ static bool handle_flags(int opt, arguments_t *arguments)
         arguments->file = optarg;
     if (opt == 'v')
         arguments->verbose = true;
+    if (opt == 'l')
+        arguments->add_spaces = true;
     return true;
 }
 
@@ -39,7 +43,7 @@ static int handle_args(int argc, char **argv, arguments_t *arguments)
     int opt = 0;
 
     while (opt != -1) {
-        opt = getopt(argc, argv, "hcrs:f:v");
+        opt = getopt(argc, argv, "hcrs:f:vl");
         if (opt == 'h')
             return display_usage();
         if (handle_flags(opt, arguments) == false)
@@ -60,12 +64,12 @@ static void free_content(error_content_t *errors, int total_errors)
 
 static void write_report(
     error_content_t *errors, error_stats_t *error_stats,
-    bool verbose, int sort_mask)
+    arguments_t *arguments)
 {
-    if (sort_mask != 0)
-        sort_errors(errors, sort_mask, error_stats->total);
+    if (arguments->sort_mask != 0)
+        sort_errors(errors, arguments->sort_mask, error_stats->total);
     write_top_line();
-    write_errors(errors, error_stats, verbose);
+    write_errors(errors, error_stats, arguments);
     if (error_stats->total == 0)
         write_no_error();
     else
@@ -88,7 +92,7 @@ int main(int argc, char **argv)
     errors = read_style_reports(&error_stats);
     if (errors == NULL)
         return -1;
-    write_report(errors, &error_stats, arguments.verbose, arguments.sort_mask);
+    write_report(errors, &error_stats, &arguments);
     free_content(errors, error_stats.total);
     if (arguments.remove_log_file == true)
         system("rm -f coding-style-reports.log");

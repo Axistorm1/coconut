@@ -11,6 +11,7 @@ typedef struct arguments_s {
     bool remove_log_file;
     bool verbose;
     bool run_coding_style;
+    bool add_spaces;
 } arguments_t;
 
 typedef struct error_content_s {
@@ -51,7 +52,7 @@ error_content_t *read_style_reports(error_stats_t *error_stats);
 int error_severity(char *line);
 char *get_error_message(char *error_code);
 void write_errors(
-    error_content_t *errors, error_stats_t *error_stats, bool verbose);
+    error_content_t *errors, error_stats_t *stats, arguments_t *arguments);
 bool is_object_file(char *filepath);
 int get_terminal_size(void);
 void write_top_line(void);

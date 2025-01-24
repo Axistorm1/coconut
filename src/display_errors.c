@@ -45,12 +45,35 @@ static void write_formatted_error(error_content_t *error, int error_nb)
         "     ", error->error_code, &error_message[4]);
 }
 
-void write_errors(
-    error_content_t *errors, error_stats_t *error_stats, bool verbose)
+static bool add_space_between_errors(int sort_mask, error_content_t *error)
 {
-    for (int i = 0; i < error_stats->total; i++) {
+    static char *last_value = "";
+    static int last_number = -1;
+
+    if (sort_mask == 0 && strcmp(last_value, error->filepath) != 0) {
+        last_value = error->filepath;
+        return true;
+    }
+    if (sort_mask == 1 && strcmp(last_value, error->error_code) != 0) {
+        last_value = error->error_code;
+        return true;
+    }
+    if (sort_mask == 2 && last_number != error->severity) {
+        last_number = error->severity;
+        return true;
+    }
+    return false;
+}
+
+void write_errors(
+    error_content_t *errors, error_stats_t *stats, arguments_t *arguments)
+{
+    for (int i = 0; i < stats->total; i++) {
+        if (arguments->add_spaces && i != 0 &&
+            add_space_between_errors(arguments->sort_mask, &errors[i]))
+            write(1, "\n", 1);
         write_formatted_error(&errors[i], i + 1);
-        if (verbose)
+        if (arguments->verbose)
             write_verbose(&errors[i]);
     }
 }
