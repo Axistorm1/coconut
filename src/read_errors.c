@@ -24,7 +24,7 @@ static void disassemble_error_line(char *line, error_content_t *content)
 {
     content->filepath = strdup(strtok(line, ":"));
     content->line = strdup(strtok(NULL, ":"));
-    content->severity = error_severity(strtok(NULL, ":"));
+    content->severity = error_severity(&strtok(NULL, ":")[1]);
     content->error_code = strndup(&strtok(NULL, ":")[2], 3);
     if (content->error_code[2] == '\n')
         content->error_code[2] = 0;

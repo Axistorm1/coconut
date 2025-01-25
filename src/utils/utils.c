@@ -6,7 +6,6 @@
 
 int error_severity(char *line)
 {
-    line = &line[1];
     if (strcmp(line, "FATAL") == 0)
         return FATAL;
     if (strcmp(line, "MAJOR") == 0)

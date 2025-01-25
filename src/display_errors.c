@@ -22,19 +22,18 @@ static void write_verbose(error_content_t *error)
     size_t len = 0;
     int line_nb = 0;
 
-    line_nb = atoi(error->line);
     if (is_object_file(error->filepath) == true)
         return;
     file = fopen(error->filepath, "r");
-    if (file == NULL) {
-        write(2, "Error opening file\n", 20);
+    if (is_file_stream_null(file, "Error opening file\n"))
         return;
-    }
+    line_nb = atoi(error->line);
     for (int i = 0; i < line_nb && getline(&line, &len, file) != -1; i++);
     line[strlen(line) - 1] = 0;
     printf("        │ -> %.120s\n", line);
     fclose(file);
-    free(line);
+    if (line)
+        free(line);
 }
 
 static void write_formatted_error(error_content_t *error, int error_nb)
