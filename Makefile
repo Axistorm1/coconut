@@ -1,13 +1,14 @@
 SRC	=	src/coconut.c	\
-		src/display_additional.c	\
-		src/display_errors.c	\
-		src/display_usage.c	\
-		src/error_codes.c	\
-		src/read_errors.c	\
-		src/sort_errors.c	\
-		src/utils/utils.c	\
-		src/utils/stream_utils.c	\
+		src/flag_handling.c	\
+		src/display/display_additional.c	\
+		src/display/display_errors.c	\
+		src/display/display_usage.c	\
+		src/errors/error_codes.c	\
+		src/errors/read_errors.c	\
+		src/errors/sort_errors.c	\
 		src/utils/file_utils.c	\
+		src/utils/stream_utils.c	\
+		src/utils/utils.c	\
 
 INCLUDE	=	include/
 
