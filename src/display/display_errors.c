@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "coconut.h"
 #include "string_macros.h"
+#include "utils.h"
 
 // Fatal black
 // Major red
@@ -15,7 +16,7 @@ static const char *colors[4] = {
     "\x1b[33m",
     "\x1b[36m"};
 
-static void write_verbose(error_content_t *error)
+static void write_verbose(const error_content_t *error)
 {
     FILE *file = NULL;
     char *line = NULL;
@@ -31,12 +32,12 @@ static void write_verbose(error_content_t *error)
     for (int i = 0; i < line_nb && getline(&line, &len, file) != -1; i++);
     line[strlen(line) - 1] = 0;
     printf("        │ -> %.120s\n", line);
-    fclose(file);
     if (line)
         free(line);
+    fclose(file);
 }
 
-static void write_formatted_error(error_content_t *error, int error_nb)
+static void write_formatted_error(const error_content_t *error, int error_nb)
 {
     char *error_message = NULL;
     const char *color_code = NULL;
@@ -53,7 +54,8 @@ static void write_formatted_error(error_content_t *error, int error_nb)
 //
 // First two lines always have a space inbetween
 // because going from empty to value changes the value
-static bool add_space_between_errors(int sort_mask, error_content_t *error)
+static bool add_space_between_errors(
+    int sort_mask, const error_content_t *error)
 {
     static char *last_value = "";
     static int last_number = -1;
@@ -74,7 +76,9 @@ static bool add_space_between_errors(int sort_mask, error_content_t *error)
 }
 
 void write_errors(
-    error_content_t *errors, error_stats_t *stats, arguments_t *arguments)
+    const error_content_t *errors,
+    const error_stats_t *stats,
+    const arguments_t *arguments)
 {
     for (int i = 0; i < stats->total; i++) {
         if (arguments->add_spaces && i != 0 &&

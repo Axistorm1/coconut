@@ -46,7 +46,7 @@ static const char *error_messages[42] = {
     "A3: Missing line break at the end of file",
     "A4: Mark intern-only functions and global variables as static"};
 
-char *get_error_message(char *error_code)
+char *get_error_message(const char *error_code)
 {
     char *tmp = NULL;
 

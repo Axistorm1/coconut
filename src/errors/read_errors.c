@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "coconut.h"
 #include "string_macros.h"
+#include "utils.h"
 
 static void add_errors(error_stats_t *error_stats, error_content_t *error)
 {

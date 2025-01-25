@@ -64,6 +64,7 @@ int main(int argc, char **argv)
     if (errors == NULL)
         return -1;
     write_report(errors, &error_stats, &arguments);
-    free_content(errors, error_stats.total);
     remove_log_file(arguments.remove_log_file);
+    free_content(errors, error_stats.total);
+    return 0;
 }

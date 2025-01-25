@@ -3,8 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include "coconut.h"
+#include "utils.h"
 
-int error_severity(char *line)
+int error_severity(const char *line)
 {
     if (strcmp(line, "FATAL") == 0)
         return FATAL;

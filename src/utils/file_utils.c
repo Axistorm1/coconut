@@ -2,8 +2,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include "utils.h"
 
-static char *get_file_extension(char *filepath)
+static char *get_file_extension(const char *filepath)
 {
     char *extension = NULL;
     char *filename = NULL;
@@ -18,7 +19,7 @@ static char *get_file_extension(char *filepath)
     return &extension[1];
 }
 
-bool is_object_file(char *filepath)
+bool is_object_file(const char *filepath)
 {
     char *extension = NULL;
 
@@ -46,7 +47,7 @@ char *get_config_file(void)
     return config_file;
 }
 
-long get_file_size(char *filepath)
+long get_file_size(const char *filepath)
 {
     struct stat stats = {};
 

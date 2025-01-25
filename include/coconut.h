@@ -49,18 +49,15 @@ enum error_codes {
 // Need to either move these into other files or clean them up
 int display_usage(void);
 error_content_t *read_style_reports(error_stats_t *error_stats);
-int error_severity(char *line);
-char *get_error_message(char *error_code);
+char *get_error_message(const char *error_code);
 void write_errors(
-    error_content_t *errors, error_stats_t *stats, arguments_t *arguments);
-bool is_object_file(char *filepath);
-int get_terminal_size(void);
+    const error_content_t *errors,
+    const error_stats_t *stats,
+    const arguments_t *arguments);
 void write_top_line(void);
 void write_bottom_line(error_stats_t *error_stats);
 void write_no_error(void);
 void sort_errors(error_content_t *error_list, int sort_mask, int error_count);
-char *get_config_file(void);
-bool is_file_stream_null(FILE *file_stream, char *error_message);
 int handle_args(int argc, char **argv, arguments_t *arguments);
 
 #endif /* COCONUT_H_ */

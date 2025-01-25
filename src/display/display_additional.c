@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "coconut.h"
 #include "string_macros.h"
+#include "utils.h"
 
 static char *dash_line_buffer(int size)
 {
