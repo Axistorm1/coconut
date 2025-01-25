@@ -33,7 +33,7 @@ Change filepath display size <br>
 # Known bugs
 -v: Some files might be wrongly displayed + not all object files are ignored <br>
 This repository has a false positive coding style error (F9) <br>
--l: The first two lines of the output will always have a space between them
+-l: The first two lines of the output will always have a space between them <br>
 coconut.config: hazardous implementation, consider as experimental
 
 # Contribute
