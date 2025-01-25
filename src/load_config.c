@@ -53,6 +53,8 @@ static bool parse_default_arguments(
     return true;
 }
 
+// Need to add a check to see if all values are correct
+// For now, let's trust the user
 bool load_config(arguments_t *arguments)
 {
     char *config_file = NULL;
@@ -67,7 +69,9 @@ bool load_config(arguments_t *arguments)
     while (getline(&line, &len, f_stream) != -1)
         if (parse_default_arguments(arguments, line) == false)
             return false;
-    fclose(f_stream);
+    if (line)
+        free(line);
     free(config_file);
+    fclose(f_stream);
     return true;
 }

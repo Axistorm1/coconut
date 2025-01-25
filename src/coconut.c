@@ -4,7 +4,8 @@
 #include "coconut.h"
 #include "string_macros.h"
 
-static void free_content(error_content_t *errors, int total_errors)
+static void free_content(
+    error_content_t *errors, int total_errors, arguments_t *arguments)
 {
     for (int i = 0; i < total_errors; i++) {
         free((&errors[i])->error_code);
@@ -12,6 +13,9 @@ static void free_content(error_content_t *errors, int total_errors)
         free((&errors[i])->line);
     }
     free(errors);
+    free(arguments->language);
+    free(arguments->report_file);
+    free(arguments->style_checker);
 }
 
 static void write_report(
@@ -69,6 +73,6 @@ int main(int argc, char **argv)
         return -1;
     write_report(errors, &error_stats, &arguments);
     remove_log_file(arguments.remove_log_file);
-    free_content(errors, error_stats.total);
+    free_content(errors, error_stats.total, &arguments);
     return 0;
 }

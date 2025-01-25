@@ -6,7 +6,8 @@
 #include "string_macros.h"
 #include "utils.h"
 
-static void add_errors(error_stats_t *error_stats, error_content_t *error)
+static void add_errors(
+    error_stats_t *error_stats, const error_content_t *error)
 {
     int severity = 0;
 
@@ -31,17 +32,16 @@ static void disassemble_error_line(char *line, error_content_t *content)
         content->error_code[2] = 0;
 }
 
-error_content_t *read_style_reports(error_stats_t *stats, char *reports_file)
+static error_content_t *read_report_lines(
+    error_stats_t *stats, FILE *f_stream)
 {
-    FILE *f_stream = NULL;
     char *line = NULL;
     size_t len = 0;
     error_content_t *list = NULL;
 
-    f_stream = fopen(reports_file, "r");
-    if (is_file_stream_null(f_stream, REPORT_NOT_FOUND))
-        return NULL;
     list = malloc(sizeof(error_content_t));
+    if (!list)
+        return NULL;
     while (getline(&line, &len, f_stream) != -1) {
         list = realloc(list, (stats->total + 1) * sizeof(error_content_t));
         disassemble_error_line(line, &list[stats->total]);
@@ -50,6 +50,21 @@ error_content_t *read_style_reports(error_stats_t *stats, char *reports_file)
     }
     if (line)
         free(line);
+    return list;
+}
+
+error_content_t *read_style_reports(
+    error_stats_t *stats, const char *reports_file)
+{
+    FILE *f_stream = NULL;
+    error_content_t *list = NULL;
+
+    f_stream = fopen(reports_file, "r");
+    if (is_file_stream_null(f_stream, REPORT_NOT_FOUND))
+        return NULL;
+    list = read_report_lines(stats, f_stream);
+    if (list == NULL)
+        return NULL;
     fclose(f_stream);
     return list;
 }

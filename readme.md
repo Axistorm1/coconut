@@ -29,12 +29,12 @@ Usage: coconut [option]
 # TO-DO
 -f to display certain files <br>
 Change filepath display size <br>
-Add coconut.config <br>
 
 # Known bugs
 -v: Some files might be wrongly displayed + not all object files are ignored <br>
 This repository has a false positive coding style error (F9) <br>
 -l: The first two lines of the output will always have a space between them
+coconut.config: hazardous implementation, consider as experimental
 
 # Contribute
 You can open issues and make pull requests, a collaborator will review them as fast as possible

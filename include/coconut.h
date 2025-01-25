@@ -51,7 +51,7 @@ enum error_codes {
 // Need to either move these into other files or clean them up
 int display_usage(void);
 error_content_t *read_style_reports(
-    error_stats_t *error_stats, char *reports_file);
+    error_stats_t *error_stats, const char *reports_file);
 char *get_error_message(const char *error_code);
 void write_errors(
     const error_content_t *errors,
