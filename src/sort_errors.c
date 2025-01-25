@@ -5,7 +5,7 @@
 static int severity_cmp(const void *error1, const void *error2)
 {
     return ((error_content_t *)error1)->severity -
-    ((error_content_t *)error2)->severity;
+        ((error_content_t *)error2)->severity;
 }
 
 static int error_cmp(const void *error1, const void *error2)
@@ -17,7 +17,7 @@ static int error_cmp(const void *error1, const void *error2)
 void sort_errors(error_content_t *error_list, int sort_mask, int error_count)
 {
     int (*sort_functions[3])(const void *, const void *) =
-    {NULL, &error_cmp, &severity_cmp};
+        {NULL, &error_cmp, &severity_cmp};
 
     qsort(error_list,
         error_count,

@@ -3,18 +3,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "coconut.h"
+#include "string_macros.h"
 
 static void add_errors(error_stats_t *error_stats, error_content_t *error)
 {
-    int severity = error->severity;
+    int severity = 0;
 
-    if (severity == 0)
+    severity = error->severity;
+    if (severity == FATAL)
         error_stats->fatals++;
-    if (severity == 1)
+    if (severity == MAJOR)
         error_stats->majors++;
-    if (severity == 2)
+    if (severity == MINOR)
         error_stats->minors++;
-    if (severity == 3)
+    if (severity == INFO)
         error_stats->infos++;
 }
 
@@ -30,15 +32,14 @@ static void disassemble_error_line(char *line, error_content_t *content)
 
 error_content_t *read_style_reports(error_stats_t *stats)
 {
-    FILE *f_stream = fopen(STYLE_REPORTS, "r");
+    FILE *f_stream = NULL;
     char *line = NULL;
     size_t len = 0;
     error_content_t *list = NULL;
 
-    if (f_stream == NULL) {
-        write(2, "Couldn't read coding-style-reports.log\n", 40);
+    f_stream = fopen(STYLE_REPORTS, "r");
+    if (is_file_stream_null(f_stream, REPORT_NOT_FOUND))
         return NULL;
-    }
     list = malloc(sizeof(error_content_t));
     while (getline(&line, &len, f_stream) != -1) {
         list = realloc(list, (stats->total + 1) * sizeof(error_content_t));

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "coconut.h"
+#include "string_macros.h"
 
 // Fatal black
 // Major red
@@ -19,12 +20,13 @@ static void write_verbose(error_content_t *error)
     FILE *file = NULL;
     char *line = NULL;
     size_t len = 0;
-    int line_nb = atoi(error->line);
+    int line_nb = 0;
 
+    line_nb = atoi(error->line);
     if (is_object_file(error->filepath) == true)
         return;
     file = fopen(error->filepath, "r");
-    if (file == NULL){
+    if (file == NULL) {
         write(2, "Error opening file\n", 20);
         return;
     }
@@ -37,14 +39,21 @@ static void write_verbose(error_content_t *error)
 
 static void write_formatted_error(error_content_t *error, int error_nb)
 {
-    char *error_message = get_error_message(error->error_code);
-    const char *color_code = colors[error->severity];
+    char *error_message = NULL;
+    const char *color_code = NULL;
 
-    printf("%5d   │ %s%-32.32s -> (l-%s)%.*s %4s \x1b[0m│ %s\n", error_nb,
-        color_code, error->filepath, error->line, 5 - (int)strlen(error->line),
-        "     ", error->error_code, &error_message[4]);
+    color_code = colors[error->severity];
+    error_message = get_error_message(error->error_code);
+    printf(ERROR_STR, error_nb, color_code, error->filepath, error->line,
+        5 - (int)strlen(error->line), "     ", error->error_code,
+        &error_message[4]);
 }
 
+// Looks ugly?
+// Might need to refactor
+//
+// First two lines always have a space inbetween
+// because going from empty to value changes the value
 static bool add_space_between_errors(int sort_mask, error_content_t *error)
 {
     static char *last_value = "";

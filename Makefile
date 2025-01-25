@@ -4,8 +4,10 @@ SRC	=	src/coconut.c	\
 		src/display_usage.c	\
 		src/error_codes.c	\
 		src/read_errors.c	\
-		src/utils.c	\
 		src/sort_errors.c	\
+		src/utils/utils.c	\
+		src/utils/stream_utils.c	\
+		src/utils/file_utils.c	\
 
 INCLUDE	=	include/
 
@@ -18,10 +20,10 @@ NAME	=	coconut
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc src/*.o $(CFLAGS) -o $(NAME)
+	gcc $(OBJ) $(CFLAGS) -o $(NAME)
 
 clean:
-	rm -f src/*.o
+	rm -f $(OBJ)
 
 fclean:	clean
 	rm -f $(NAME)

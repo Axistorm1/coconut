@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "coconut.h"
+#include "string_macros.h"
 
 static char *dash_line_buffer(int size)
 {
@@ -18,7 +19,8 @@ void write_top_line(void)
 
     printf("%s\n"
         "        │ File: %s\n"
-        "%s\n", buffer, STYLE_REPORTS, buffer);
+        "%s\n",
+        buffer, STYLE_REPORTS, buffer);
     free(buffer);
 }
 
@@ -28,7 +30,8 @@ void write_bottom_line(error_stats_t *stats)
 
     printf("%s\n"
         "        │ Total: %d | Fatal: %d | Major: %d | Minor: %d | Info: %d\n"
-        "%s\n", buffer, stats->total, stats->fatals, stats->majors,
+        "%s\n",
+        buffer, stats->total, stats->fatals, stats->majors,
         stats->minors, stats->infos, buffer);
     free(buffer);
 }
@@ -39,6 +42,7 @@ void write_no_error(void)
 
     printf("%s\n"
         "        │ No error found! Great job\n"
-        "%s\n", buffer, buffer);
+        "%s\n",
+        buffer, buffer);
     free(buffer);
 }
