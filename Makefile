@@ -9,6 +9,7 @@ SRC	=	src/coconut.c	\
 		src/utils/file_utils.c	\
 		src/utils/stream_utils.c	\
 		src/utils/utils.c	\
+		src/load_config.c	\
 
 INCLUDE	=	include/
 

@@ -4,13 +4,13 @@
 #include "coconut.h"
 #include "string_macros.h"
 
-static int sort_mask(char *optarg)
+int sort_mask(char *mask_str)
 {
-    if (strcmp(optarg, "file") == 0)
+    if (strcmp(mask_str, "file") == 0)
         return 0;
-    if (strcmp(optarg, "error") == 0)
+    if (strcmp(mask_str, "error") == 0)
         return 1;
-    if (strcmp(optarg, "severity") == 0)
+    if (strcmp(mask_str, "severity") == 0)
         return 2;
     return -1;
 }

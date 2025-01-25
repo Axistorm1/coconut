@@ -31,14 +31,14 @@ static void disassemble_error_line(char *line, error_content_t *content)
         content->error_code[2] = 0;
 }
 
-error_content_t *read_style_reports(error_stats_t *stats)
+error_content_t *read_style_reports(error_stats_t *stats, char *reports_file)
 {
     FILE *f_stream = NULL;
     char *line = NULL;
     size_t len = 0;
     error_content_t *list = NULL;
 
-    f_stream = fopen(STYLE_REPORTS, "r");
+    f_stream = fopen(reports_file, "r");
     if (is_file_stream_null(f_stream, REPORT_NOT_FOUND))
         return NULL;
     list = malloc(sizeof(error_content_t));

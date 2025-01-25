@@ -2,11 +2,13 @@
     #define COCONUT_H_
 
     #include <stdbool.h>
-    #include <stdio.h>
 
 typedef struct arguments_s {
     char *file;
     int sort_mask;
+    char *language;
+    char *style_checker;
+    char *report_file;
     bool remove_log_file;
     bool verbose;
     bool run_coding_style;
@@ -48,16 +50,19 @@ enum error_codes {
 
 // Need to either move these into other files or clean them up
 int display_usage(void);
-error_content_t *read_style_reports(error_stats_t *error_stats);
+error_content_t *read_style_reports(
+    error_stats_t *error_stats, char *reports_file);
 char *get_error_message(const char *error_code);
 void write_errors(
     const error_content_t *errors,
     const error_stats_t *stats,
     const arguments_t *arguments);
-void write_top_line(void);
+void write_top_line(char *reports_file);
 void write_bottom_line(error_stats_t *error_stats);
 void write_no_error(void);
 void sort_errors(error_content_t *error_list, int sort_mask, int error_count);
 int handle_args(int argc, char **argv, arguments_t *arguments);
+bool load_config(arguments_t *arguments);
+int sort_mask(char *optarg);
 
 #endif /* COCONUT_H_ */

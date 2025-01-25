@@ -2,10 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "coconut.h"
-#include "string_macros.h"
 #include "utils.h"
 
-static char *dash_line_buffer(int size)
+static char *dash_line_buffer(ulong size)
 {
     char *buffer = malloc(sizeof(char) * (size + 1));
 
@@ -14,14 +13,14 @@ static char *dash_line_buffer(int size)
     return buffer;
 }
 
-void write_top_line(void)
+void write_top_line(char *reports_file)
 {
     char *buffer = dash_line_buffer(get_terminal_size());
 
     printf("%s\n"
         "        │ File: %s\n"
         "%s\n",
-        buffer, STYLE_REPORTS, buffer);
+        buffer, reports_file, buffer);
     free(buffer);
 }
 

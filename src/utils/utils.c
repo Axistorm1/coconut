@@ -1,5 +1,6 @@
 #include <sys/ioctl.h>
 #include <stdio.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
 #include "coconut.h"
@@ -18,7 +19,7 @@ int error_severity(const char *line)
     return 3;
 }
 
-int get_terminal_size(void)
+ulong get_terminal_size(void)
 {
     struct winsize size = {0};
 
@@ -26,5 +27,5 @@ int get_terminal_size(void)
         perror("ioctl");
         return 0;
     }
-    return size.ws_col;
+    return (ulong)size.ws_col;
 }

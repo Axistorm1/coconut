@@ -21,6 +21,6 @@ make -s fclean
 
 mkdir -p $USER_HOME/coconut
 cp $CONFIG_NAME $USER_HOME/coconut
+wait
 
-echo -e "Installation complete!\n"
-coconut -h
+echo -e "Installation complete!"

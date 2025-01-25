@@ -49,7 +49,7 @@ char *get_config_file(void)
 
 long get_file_size(const char *filepath)
 {
-    struct stat stats = {};
+    struct stat stats = {0};
 
     stat(filepath, &stats);
     return stats.st_size;

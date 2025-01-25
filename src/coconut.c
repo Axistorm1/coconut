@@ -20,10 +20,12 @@ static void write_report(
 {
     if (arguments->sort_mask != 0)
         sort_errors(errors, arguments->sort_mask, error_stats->total);
-    write_top_line();
+    write_top_line(arguments->report_file);
     write_errors(errors, error_stats, arguments);
-    if (error_stats->total == 0)
-        return write_no_error();
+    if (error_stats->total == 0) {
+        write_no_error();
+        return;
+    }
     write_bottom_line(error_stats);
 }
 
@@ -54,13 +56,15 @@ int main(int argc, char **argv)
     error_content_t *errors = NULL;
     int handling_result = 0;
 
+    if (load_config(&arguments) == false)
+        return -1;
     handling_result = handle_args(argc, argv, &arguments);
     if (handling_result == -1)
         return -1;
     if (handling_result == 1)
         return 0;
     run_coding_style(arguments.run_coding_style);
-    errors = read_style_reports(&error_stats);
+    errors = read_style_reports(&error_stats, arguments.report_file);
     if (errors == NULL)
         return -1;
     write_report(errors, &error_stats, &arguments);
