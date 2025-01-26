@@ -7,11 +7,11 @@
 int sort_mask(char *mask_str)
 {
     if (strcmp(mask_str, "file") == 0)
-        return 0;
+        return SORT_FILE;
     if (strcmp(mask_str, "error") == 0)
-        return 1;
+        return SORT_ERROR;
     if (strcmp(mask_str, "severity") == 0)
-        return 2;
+        return SORT_SEVERITY;
     return -1;
 }
 

@@ -49,29 +49,18 @@ static void write_formatted_error(const error_content_t *error, int error_nb)
         &error_message[4]);
 }
 
-// Looks ugly?
-// Might need to refactor
-//
-// First two lines always have a space inbetween
-// because going from empty to value changes the value
 static bool add_space_between_errors(
-    int sort_mask, const error_content_t *error)
+    int sort_mask, const error_content_t *error, const error_content_t *prev)
 {
-    static char *last_value = "";
-    static int last_number = -1;
-
-    if (sort_mask == 0 && strcmp(last_value, error->filepath) != 0) {
-        last_value = error->filepath;
+    if (sort_mask == SORT_FILE &&
+        strcmp(error->filepath, prev->filepath) != 0)
         return true;
-    }
-    if (sort_mask == 1 && strcmp(last_value, error->error_code) != 0) {
-        last_value = error->error_code;
+    if (sort_mask == SORT_ERROR &&
+        strcmp(error->error_code, prev->error_code) != 0)
         return true;
-    }
-    if (sort_mask == 2 && last_number != error->severity) {
-        last_number = error->severity;
+    if (sort_mask == SORT_SEVERITY &&
+        error->severity != prev->severity)
         return true;
-    }
     return false;
 }
 
@@ -82,7 +71,8 @@ void write_errors(
 {
     for (int i = 0; i < stats->total; i++) {
         if (arguments->add_spaces && i != 0 &&
-            add_space_between_errors(arguments->sort_mask, &errors[i]))
+            add_space_between_errors(
+                arguments->sort_mask, &errors[i], &errors[i - 1]))
             write(1, "\n", 1);
         write_formatted_error(&errors[i], i + 1);
         if (arguments->verbose)

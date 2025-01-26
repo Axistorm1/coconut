@@ -33,12 +33,12 @@ static void write_report(
     write_bottom_line(error_stats);
 }
 
-static void run_coding_style(bool run_coding_style)
+static void run_coding_style(bool run_coding_style, char *style_checker)
 {
     int system_return = 0;
 
     if (run_coding_style)
-        system_return = system(RUN_CODING_STYLE_COMMAND);
+        system_return = system(style_checker);
     if (system_return == -1 || system_return == 127)
         write(1, "Error running coding style checker\n", 36);
 }
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         return -1;
     if (handling_result == 1)
         return 0;
-    run_coding_style(arguments.run_coding_style);
+    run_coding_style(arguments.run_coding_style, arguments.style_checker);
     errors = read_style_reports(&error_stats, arguments.report_file);
     if (errors == NULL)
         return -1;

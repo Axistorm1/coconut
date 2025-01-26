@@ -6,8 +6,11 @@
 
 static char *dash_line_buffer(ulong size)
 {
-    char *buffer = malloc(sizeof(char) * (size + 1));
+    char *buffer = NULL;
 
+    buffer = malloc(sizeof(char) * (size + 1));
+    if (!buffer)
+        return NULL;
     buffer[size] = 0;
     memset(buffer, '-', size);
     return buffer;
@@ -15,8 +18,11 @@ static char *dash_line_buffer(ulong size)
 
 void write_top_line(char *reports_file)
 {
-    char *buffer = dash_line_buffer(get_terminal_size());
+    char *buffer = NULL;
 
+    buffer = dash_line_buffer(get_terminal_size());
+    if (!buffer)
+        return;
     printf("%s\n"
         "        │ File: %s\n"
         "%s\n",
@@ -26,8 +32,11 @@ void write_top_line(char *reports_file)
 
 void write_bottom_line(error_stats_t *stats)
 {
-    char *buffer = dash_line_buffer(get_terminal_size());
+    char *buffer = NULL;
 
+    buffer = dash_line_buffer(get_terminal_size());
+    if (!buffer)
+        return;
     printf("%s\n"
         "        │ Total: %d | Fatal: %d | Major: %d | Minor: %d | Info: %d\n"
         "%s\n",
@@ -38,8 +47,11 @@ void write_bottom_line(error_stats_t *stats)
 
 void write_no_error(void)
 {
-    char *buffer = dash_line_buffer(get_terminal_size());
+    char *buffer = NULL;
 
+    buffer = dash_line_buffer(get_terminal_size());
+    if (!buffer)
+        return;
     printf("%s\n"
         "        │ No error found! Great job\n"
         "%s\n",
