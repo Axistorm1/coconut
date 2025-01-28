@@ -41,11 +41,15 @@ static void write_formatted_error(const error_content_t *error, int error_nb)
 {
     char *error_message = NULL;
     const char *color_code = NULL;
+    char file_and_line[35];
 
+    memset(file_and_line, 0, 34);
+    strncat(file_and_line, error->filepath, 32);
+    strcat(file_and_line, ":");
+    strcat(file_and_line, error->line);
     color_code = colors[error->severity];
     error_message = get_error_message(error->error_code);
-    printf(ERROR_STR, error_nb, color_code, error->filepath, error->line,
-        5 - (int)strlen(error->line), "     ", error->error_code,
+    printf(ERROR_STR, error_nb, color_code, file_and_line, error->error_code,
         &error_message[4]);
 }
 
