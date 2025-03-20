@@ -1,0 +1,11 @@
+## IDE FILES
+.vscode
+.idea
+.DS_Store
+
+## BINARY FILES
+coconut
+*.o
+*.a
+*.so
+build
