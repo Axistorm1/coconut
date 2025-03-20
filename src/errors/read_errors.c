@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2025
+** coconut
+** File description:
+** read_errors
+*/
+
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>

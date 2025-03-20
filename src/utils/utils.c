@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2025
+** coconut
+** File description:
+** utils
+*/
+
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <sys/types.h>

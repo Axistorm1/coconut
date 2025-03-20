@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2025
+** coconut
+** File description:
+** coconut
+*/
+
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>

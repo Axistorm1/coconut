@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2025
+## coconut
+## File description:
+## Makefile
+##
+
 NAME	=	coconut
 
 all: $(NAME)
