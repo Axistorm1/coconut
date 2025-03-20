@@ -43,7 +43,7 @@ static error_content_t *read_report_lines(
     if (!list)
         return NULL;
     while (getline(&line, &len, f_stream) != -1) {
-        list = realloc(list, (stats->total + 1) * sizeof(error_content_t));
+        list = realloc(list, (size_t)(stats->total + 1) * sizeof(error_content_t));
         disassemble_error_line(line, &list[stats->total]);
         add_errors(stats, &list[stats->total]);
         stats->total++;

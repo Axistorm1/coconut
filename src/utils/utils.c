@@ -19,7 +19,7 @@ int error_severity(const char *line)
     return 3;
 }
 
-ulong get_terminal_size(void)
+unsigned long get_terminal_size(void)
 {
     struct winsize size = {0};
 
@@ -27,5 +27,5 @@ ulong get_terminal_size(void)
         perror("ioctl");
         return 0;
     }
-    return (ulong)size.ws_col;
+    return (unsigned long)size.ws_col;
 }
