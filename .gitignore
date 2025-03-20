@@ -9,3 +9,4 @@ coconut
 *.a
 *.so
 build
+cmake-build-debug
