@@ -15,6 +15,7 @@ sudo ./install.sh
 Coding-style-checker <br>
 GCC <br>
 Make <br>
+CMake <br>
 
 # Usage
 ```
@@ -24,6 +25,7 @@ Usage: coconut [option]
   -r        Remove log file after displaying errors
   -s [opt]  Sort output either by "file", "error" or "severity" (default "file")
   -l        Add a line between different errors depending on the sorting flag
+  -e [opt]  Exclude a folder from coding style reports
 ```
 
 # TO-DO
