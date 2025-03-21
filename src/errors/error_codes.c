@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** error_codes
-*/
-
 #include <stddef.h>
 #include <string.h>
 #include "coconut.h"
@@ -51,7 +44,7 @@ static const char *error_messages[42] = {
     "A1: Not modified variables must be marked as constant",
     "A2: Use accurate types",
     "A3: Missing line break at the end of file",
-    "A4: Mark intern-only functions and global variables as static"};
+    "A4: Intern-only functions and global variables as static"};
 
 char *get_error_message(const char *error_code)
 {

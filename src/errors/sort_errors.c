@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** sort_errors
-*/
-
 #include "coconut.h"
 #include <stdlib.h>
 #include <string.h>

@@ -55,6 +55,9 @@ enum error_codes {
     A1, A2, A3, A4
 };
 
+    #define MAX_ERROR_SIZE 52
+    #define MAX_NB_SIZE 7
+
 // Need to either move these into other files or clean them up
 int display_usage(void);
 error_content_t *read_style_reports(

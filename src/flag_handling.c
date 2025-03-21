@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** flag_handling
-*/
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

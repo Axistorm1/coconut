@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** display_usage
-*/
-
 #include <unistd.h>
 #include "coconut.h"
 

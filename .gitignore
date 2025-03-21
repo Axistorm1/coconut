@@ -3,9 +3,11 @@
 .idea
 .DS_Store
 .cache
+compile_commands.json
 
 ## LOGS
 *.log
+*.txt
 
 ## BINARY FILES
 coconut

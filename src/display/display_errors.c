@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** display_errors
-*/
-
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,20 +37,24 @@ static void write_verbose(const error_content_t *error)
     fclose(file);
 }
 
-static void write_formatted_error(const error_content_t *error, int error_nb)
+static void write_formatted_error(
+    const error_content_t *error,
+    int error_nb,
+    size_t term_size)
 {
     char *error_message = NULL;
     const char *color_code = NULL;
-    char file_and_line[50];
+    char file_and_line[term_size];
+    int max_message_size = (int)(term_size - MAX_ERROR_SIZE - MAX_NB_SIZE);
 
-    memset(file_and_line, 0, 34);
-    strncat(file_and_line, error->filepath, 32);
+    error_message = get_error_message(error->error_code);
+    memset(file_and_line, 0, term_size);
+    strncat(file_and_line, error->filepath, (size_t)max_message_size);
     strcat(file_and_line, ":");
     strcat(file_and_line, error->line);
     color_code = colors[error->severity];
-    error_message = get_error_message(error->error_code);
-    printf(ERROR_STR, error_nb, color_code, file_and_line, error->error_code,
-        &error_message[4]);
+    printf(ERROR_STR, error_nb, color_code, max_message_size, max_message_size,
+        file_and_line, error->error_code, &error_message[4]);
 }
 
 static bool add_space_between_errors(
@@ -80,12 +77,19 @@ void write_errors(
     const error_stats_t *stats,
     const arguments_t *arguments)
 {
+    size_t term_size = 0;
+    term_size = get_terminal_size();
+
+    if (term_size < 52) {
+        write(STDERR_FILENO, "Terminal size is too small\n", 27);
+        return;
+    }
     for (int i = 0; i < stats->total; i++) {
         if (arguments->add_spaces && i != 0 &&
             add_space_between_errors(
                 arguments->sort_mask, &errors[i], &errors[i - 1]))
             write(1, "\n", 1);
-        write_formatted_error(&errors[i], i + 1);
+        write_formatted_error(&errors[i], i + 1, term_size);
         if (arguments->verbose)
             write_verbose(&errors[i]);
     }

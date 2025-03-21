@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** load_config
-*/
-
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>

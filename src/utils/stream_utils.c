@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** coconut
-** File description:
-** stream_utils
-*/
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
