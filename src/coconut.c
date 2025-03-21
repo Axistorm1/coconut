@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     if (handling_result == 1)
         return 0;
     run_coding_style(arguments.run_coding_style, arguments.style_checker);
-    errors = read_style_reports(&error_stats, arguments.report_file);
+    errors = read_style_reports(&error_stats, &arguments);
     if (errors == NULL)
         return -1;
     write_report(errors, &error_stats, &arguments);

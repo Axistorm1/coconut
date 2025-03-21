@@ -48,7 +48,7 @@ static void write_formatted_error(const error_content_t *error, int error_nb)
 {
     char *error_message = NULL;
     const char *color_code = NULL;
-    char file_and_line[35];
+    char file_and_line[50];
 
     memset(file_and_line, 0, 34);
     strncat(file_and_line, error->filepath, 32);

@@ -6,6 +6,8 @@
 */
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "coconut.h"
@@ -31,10 +33,32 @@ static bool is_sort_flag_correct(int sort_mask)
     return true;
 }
 
-static bool handle_flags(int opt, arguments_t *arguments)
+static char **parse_ignored_dir(char **ignored_dirs, arguments_t *arguments)
 {
-    if (opt == '?')
-        return false;
+    int i = 0;
+
+    if (!ignored_dirs || !ignored_dirs[0]) {
+        fprintf(stderr, "No directories specified. Skip option\n");
+        return NULL;
+    }
+    arguments->ignored_files = malloc(sizeof(char *));
+    for (i = 0; ignored_dirs[i]; i++) {
+        arguments->ignored_files = realloc(arguments->ignored_files,
+            sizeof(char *) * (size_t)i + 2);
+        arguments->ignored_files[i] = strdup(ignored_dirs[i]);
+        if (!arguments->ignored_files[i]) {
+            fprintf(stderr, "Error allocating memory for ignored_files\n");
+        }
+    }
+    arguments->ignored_files[i] = NULL;
+    return arguments->ignored_files;
+}
+
+static bool handle_flags(int opt, arguments_t *arguments,
+    char **av)
+{
+    if (opt == 'e')
+        arguments->ignored_files = parse_ignored_dir(av, arguments);
     if (opt == 'c')
         arguments->run_coding_style = true;
     if (opt == 'r')
@@ -56,13 +80,15 @@ static bool handle_flags(int opt, arguments_t *arguments)
 int handle_args(int argc, char **argv, arguments_t *arguments)
 {
     int opt = 0;
+    int i = 1;
 
     while (opt != -1) {
         opt = getopt(argc, argv, HANDLED_FLAGS);
         if (opt == 'h')
             return display_usage();
-        if (handle_flags(opt, arguments) == false)
+        if (handle_flags(opt, arguments, &argv[i + 1]) == false)
             return -1;
+        i++;
     }
     return 0;
 }
