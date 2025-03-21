@@ -53,8 +53,14 @@ static bool parse_default_arguments(
     return true;
 }
 
-// Need to add a check to see if all values are correct
-// For now, let's trust the user
+static void load_default_config(arguments_t *arguments)
+{
+    arguments->sort_mask = 0;
+    arguments->language = strdup("en");
+    arguments->style_checker = strdup("coding-style . .");
+    arguments->report_file = strdup("coding-style-reports.log");
+}
+
 bool load_config(arguments_t *arguments)
 {
     char *config_file = NULL;
@@ -64,8 +70,10 @@ bool load_config(arguments_t *arguments)
 
     config_file = get_config_file();
     f_stream = fopen(config_file, "r");
-    if (is_file_stream_null(f_stream, "Config file not found\n"))
-        return false;
+    if (is_file_stream_null(f_stream, "Config file not found\n")) {
+        load_default_config(arguments);
+        return true;
+    }
     while (getline(&line, &len, f_stream) != -1)
         if (parse_default_arguments(arguments, line) == false)
             return false;
