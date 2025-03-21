@@ -77,8 +77,7 @@ void write_errors(
     const error_stats_t *stats,
     const arguments_t *arguments)
 {
-    size_t term_size = 0;
-    term_size = get_terminal_size();
+    size_t term_size = get_terminal_size();
 
     if (term_size < 52) {
         write(STDERR_FILENO, "Terminal size is too small\n", 27);

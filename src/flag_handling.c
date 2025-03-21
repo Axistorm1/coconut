@@ -50,6 +50,8 @@ static char **parse_ignored_dir(char **ignored_dirs, arguments_t *arguments)
 static bool handle_flags(int opt, arguments_t *arguments,
     char **av)
 {
+    if (opt == '?')
+        return false;
     if (opt == 'e')
         arguments->ignored_files = parse_ignored_dir(av, arguments);
     if (opt == 'c')
