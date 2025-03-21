@@ -1,10 +1,17 @@
+/*
+** EPITECH PROJECT, 2025
+** coconut
+** File description:
+** display_additional
+*/
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "coconut.h"
 #include "utils.h"
 
-static char *dash_line_buffer(ulong size)
+static char *dash_line_buffer(unsigned long size)
 {
     char *buffer = NULL;
 

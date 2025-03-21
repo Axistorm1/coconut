@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2025
+** coconut
+** File description:
+** error_codes
+*/
+
 #include <stddef.h>
 #include <string.h>
 #include "coconut.h"

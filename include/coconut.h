@@ -9,6 +9,7 @@ typedef struct arguments_s {
     char *language;
     char *style_checker;
     char *report_file;
+    char **ignored_files;
     bool remove_log_file;
     bool verbose;
     bool run_coding_style;
@@ -57,7 +58,7 @@ enum error_codes {
 // Need to either move these into other files or clean them up
 int display_usage(void);
 error_content_t *read_style_reports(
-    error_stats_t *error_stats, const char *reports_file);
+    error_stats_t *error_stats, const arguments_t *arguments);
 char *get_error_message(const char *error_code);
 void write_errors(
     const error_content_t *errors,

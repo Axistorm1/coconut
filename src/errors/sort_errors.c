@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2025
+** coconut
+** File description:
+** sort_errors
+*/
+
 #include "coconut.h"
 #include <stdlib.h>
 #include <string.h>
@@ -20,7 +27,7 @@ void sort_errors(error_content_t *error_list, int sort_mask, int error_count)
         {NULL, &error_cmp, &severity_cmp};
 
     qsort(error_list,
-        error_count,
+        (size_t)error_count,
         sizeof(error_content_t),
         sort_functions[sort_mask]);
 }

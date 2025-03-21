@@ -1,34 +1,36 @@
-SRC	=	src/coconut.c	\
-		src/flag_handling.c	\
-		src/display/display_additional.c	\
-		src/display/display_errors.c	\
-		src/display/display_usage.c	\
-		src/errors/error_codes.c	\
-		src/errors/read_errors.c	\
-		src/errors/sort_errors.c	\
-		src/utils/file_utils.c	\
-		src/utils/stream_utils.c	\
-		src/utils/utils.c	\
-		src/load_config.c	\
-
-INCLUDE	=	include/
-
-OBJ = 	$(SRC:%.c=%.o)
-
-CFLAGS	+= -Wall -Wextra -I $(INCLUDE)
+##
+## EPITECH PROJECT, 2025
+## coconut
+## File description:
+## Makefile
+##
 
 NAME	=	coconut
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	gcc $(OBJ) $(CFLAGS) -o $(NAME)
+.PHONY: $(NAME)
+$(NAME):
+	@mkdir -p build
+	@cd build && CC=gcc cmake -DCMAKE_BUILD_TYPE=Debug ..
+	@cmake --build build
+	@cp build/$(NAME) .
+
+.PHONY: debug
+debug:
+	@mkdir -p build
+	@cd build && CC=gcc cmake -DCMAKE_BUILD_TYPE=Debug \
+ 			-DCMAKE_CXX_FLAGS="-fsanitize=address" \
+ 			-DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address" ..
+	@cmake --build build --parallel 12
+	@cp build/$(NAME) .
 
 clean:
-	rm -f $(OBJ)
+	$(RM) -r build
+	$(RM) -r cmake-build-debug
 
 fclean:	clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean $(NAME)
 

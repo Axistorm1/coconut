@@ -1,0 +1,16 @@
+## IDE FILES
+.vscode
+.idea
+.DS_Store
+.cache
+
+## LOGS
+*.log
+
+## BINARY FILES
+coconut
+*.o
+*.a
+*.so
+build
+cmake-build-debug
