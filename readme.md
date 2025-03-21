@@ -34,7 +34,6 @@ Change filepath display size <br>
 
 # Known bugs
 -v: not all object files are ignored <br>
-This repository has a false positive coding style error (F9) <br>
 coconut.config: hazardous implementation, consider as experimental
 
 # Contribute
