@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include "coconut.h"
 #include "string_macros.h"
@@ -22,8 +23,11 @@ static void write_verbose(const error_content_t *error)
     char *line = NULL;
     size_t len = 0;
     int line_nb = 0;
+    struct stat stat_buffer;
 
     if (is_object_file(error->filepath) == true)
+        return;
+    if (stat(error->filepath, &stat_buffer) == -1 || stat_buffer.st_size == 0)
         return;
     file = fopen(error->filepath, "r");
     if (is_file_stream_null(file, "Error opening file\n"))
