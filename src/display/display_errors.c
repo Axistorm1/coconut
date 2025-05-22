@@ -49,7 +49,8 @@ static void write_formatted_error(
     char *error_message = NULL;
     const char *color_code = NULL;
     char file_and_line[term_size];
-    int max_message_size = (int)(term_size - MAX_ERROR_SIZE - MAX_NB_SIZE);
+    int max_message_size = (int)
+        (term_size - MAX_ERROR_SIZE - MAX_NB_SIZE - 10);
 
     error_message = get_error_message(error->error_code);
     memset(file_and_line, 0, term_size);
