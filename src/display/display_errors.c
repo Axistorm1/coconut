@@ -53,6 +53,8 @@ static void write_formatted_error(
         (term_size - MAX_ERROR_SIZE - MAX_NB_SIZE - 10);
 
     error_message = get_error_message(error->error_code);
+    if (!error_message)
+        return;
     memset(file_and_line, 0, term_size);
     strncat(file_and_line, error->filepath, (size_t)max_message_size);
     strcat(file_and_line, ":");

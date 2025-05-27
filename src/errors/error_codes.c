@@ -1,8 +1,9 @@
 #include <stddef.h>
+#include <stdio.h>
 #include <string.h>
 #include "coconut.h"
 
-static const char *error_messages[42] = {
+static const char *c_error_messages[42] = {
     "O1: Object file",
     "O2: Extension should be .c or .h",
     "O3: Max functions reached (10)",
@@ -46,14 +47,35 @@ static const char *error_messages[42] = {
     "A3: Missing line break at the end of file",
     "A4: Intern-only functions and global variables as static"};
 
+static const char *h_error_messages[14] = {
+    "O1: Object file",
+    "O2: Extension should be .hs",
+    "O3: Badly organized project",
+    "O4: File name must be UpperCamelCase",
+    "E1: Language extensions are forbidden",
+    "T1: Missing type signature",
+    "M1: Mutable variables are forbidden",
+    "F1: Functions must be less than 10 lines and 80 columns",
+    "F2: Function name must be lowerCamelCase",
+    "V1: Variable name must be lowerCamelCase",
+    "C1: No nested if statements",
+    "C2: Guards must be expressed as such",
+    "D1: Unjustified use of the do notation is forbidden",
+    "D2: Useless generators are forbidden"
+};
+
 char *get_error_message(const char *error_code)
 {
-    char *tmp = NULL;
+    char *message = NULL;
 
+    printf("Error code: %s\n", error_code);
     for (int i = 0; i < 42; i++) {
-        tmp = strstr(error_messages[i], error_code);
-        if (tmp != NULL)
-            return tmp;
+        if (error_code[0] == 'H')
+            message = strstr(h_error_messages[i], &error_code[2]);
+        if (!message)
+            message = strstr(c_error_messages[i], &error_code[2]);
+        if (message)
+            return message;
     }
-    return NULL;
+    return message;
 }

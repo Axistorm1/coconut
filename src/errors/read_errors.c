@@ -37,6 +37,14 @@ static bool check_ignored_files(
     return false;
 }
 
+static void replace_last_char(char *line)
+{
+    size_t len = strlen(line);
+
+    if (line[len - 1] == '\n' || line[len - 1] == ' ')
+        line[len - 1] = 0;
+}
+
 static void disassemble_error_line(char *line, error_content_t *content,
     const arguments_t *arguments)
 {
@@ -44,12 +52,10 @@ static void disassemble_error_line(char *line, error_content_t *content,
     if (check_ignored_files(arguments, content) == false) {
         content->line = strdup(strtok(NULL, ":"));
         content->severity = error_severity(&strtok(NULL, ":")[1]);
-        content->error_code = strndup(&strtok(NULL, ":")[2], 3);
-        if (content->error_code[2] == '\n')
-            content->error_code[2] = 0;
-    } else {
+        content->error_code = strndup(strtok(NULL, ":"), 5);
+        replace_last_char(content->error_code);
+    } else
         content->filepath = NULL;
-    }
 }
 
 static error_content_t *read_report_lines(
