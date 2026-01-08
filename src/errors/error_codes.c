@@ -45,7 +45,8 @@ static const char *c_error_messages[42] = {
     "A1: Not modified variables must be marked as constant",
     "A2: Use accurate types",
     "A3: Missing line break at the end of file",
-    "A4: Intern-only functions and global variables as static"};
+    "A4: Intern-only functions and global variables as static",
+    "P1: File could not be parsed"};
 
 static const char *h_error_messages[15] = {
     "O1: Object file",
