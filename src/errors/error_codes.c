@@ -47,7 +47,7 @@ static const char *c_error_messages[42] = {
     "A3: Missing line break at the end of file",
     "A4: Intern-only functions and global variables as static"};
 
-static const char *h_error_messages[14] = {
+static const char *h_error_messages[15] = {
     "O1: Object file",
     "O2: Extension should be .hs",
     "O3: Badly organized project",
@@ -62,6 +62,7 @@ static const char *h_error_messages[14] = {
     "C2: Guards must be expressed as such",
     "D1: Unjustified use of the do notation is forbidden",
     "D2: Useless generators are forbidden"
+    "P1: File could not be parsed"
 };
 
 char *get_error_message(const char *error_code)
