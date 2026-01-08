@@ -3,7 +3,7 @@
 #include <string.h>
 #include "coconut.h"
 
-static const char *c_error_messages[42] = {
+static const char *c_error_messages[43] = {
     "O1: Object file",
     "O2: Extension should be .c or .h",
     "O3: Max functions reached (10)",
